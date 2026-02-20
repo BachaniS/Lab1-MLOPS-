@@ -1,6 +1,7 @@
 import sys
 import os
 import unittest
+import math
 
 # Get the path to the project's root directory
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -36,6 +37,27 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(calculator.fun4(5, 0, -1), 4)
         self.assertEqual(calculator.fun4(-1, -1, -1), -3)
         self.assertEqual(calculator.fun4(-1, -1, 100), 98)
+
+    def test_profit_loss(self):
+        self.assertEqual(calculator.profit_loss(100, 130), 30)
+        self.assertEqual(calculator.profit_loss(100, 70), -30)
+        self.assertEqual(calculator.profit_loss(100, 100), 0)
+
+    def test_simple_interest(self):
+        self.assertEqual(calculator.simple_interest(1000, 10, 2), 200)
+        self.assertEqual(calculator.simple_interest(5000, 5, 1), 250)
+        self.assertEqual(calculator.simple_interest(1200, 7.5, 2), 180)
+
+    def test_compound_interest(self):
+        self.assertTrue(math.isclose(calculator.compound_interest(1000, 10, 2), 210.0))
+        self.assertTrue(
+            math.isclose(
+                calculator.compound_interest(1000, 12, 2, 4),
+                266.7700813876163,
+                rel_tol=1e-9,
+            )
+        )
+        self.assertTrue(math.isclose(calculator.compound_interest(1500, 7, 3), 337.5645000000002, rel_tol=1e-9))
 
 
 
